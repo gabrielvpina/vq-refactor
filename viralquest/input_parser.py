@@ -3,7 +3,7 @@ import os
 from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
 from loguru import logger
-from biodata import BioSequence
+from biodata import NucSequence
 
 # This script will handle all data input and parsing of fasta files.
 # I'm still learning some concepts about OOP, but my plan is aplly some of this concepts here.
@@ -13,7 +13,7 @@ class FastaParser:
     def __init__(self, file_path: str):
 
         self.file_path: str = file_path
-        self.sequences: list[SeqRecord] = []
+        self.sequences: list[NucSequence] = []
         self.allowed_nucleotides: set[str] = set("ATCGUN-")
 
         logger.info("Starting fasta parser")
@@ -42,10 +42,9 @@ class FastaParser:
             
             # save sequence info to Biosequence dataclass
             sequence_string = str(record.seq)
-            new_sequence = BioSequence(
+            new_sequence = NucSequence(
                 id=record.id,
                 sequence=sequence_string,
-                length=len(sequence_string)
             )
 
             self.sequences.append(record)
@@ -53,11 +52,13 @@ class FastaParser:
         logger.success(f"Found {len(self.sequences)} valid sequences in {self.file_path}")
 
 
- 
+    # some extra informations of the sequences to send to Biosequence
+    # Length and GC
+    # def get_info_seqs(self):
+
+    
 
 
-meu_parser = FastaParser("meu_dna.fasta") 
 
 
-meu_parser.read_input_file()
 
