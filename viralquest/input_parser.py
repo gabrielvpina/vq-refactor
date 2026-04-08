@@ -3,7 +3,7 @@ import os
 from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
 from loguru import logger
-from .models import BioSequence
+from biodata import BioSequence
 
 # This script will handle all data input and parsing of fasta files.
 # I'm still learning some concepts about OOP, but my plan is aplly some of this concepts here.
@@ -42,7 +42,6 @@ class FastaParser:
             
             # save sequence info to Biosequence dataclass
             sequence_string = str(record.seq)
-            
             new_sequence = BioSequence(
                 id=record.id,
                 sequence=sequence_string,
