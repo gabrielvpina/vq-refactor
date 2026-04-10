@@ -2,7 +2,7 @@ from dataclasses import dataclass, field
 
 @dataclass
 class NucSequence:
-    """Representa uma sequência biológica validada."""
+    """Valid biological sequences."""
     id: str
     sequence: str
     

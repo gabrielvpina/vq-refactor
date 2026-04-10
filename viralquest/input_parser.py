@@ -3,7 +3,7 @@ import os
 from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
 from loguru import logger
-from biodata import NucSequence
+from .biodata import NucSequence
 
 # This script will handle all data input and parsing of fasta files.
 # I'm still learning some concepts about OOP, but my plan is aplly some of this concepts here.
@@ -41,13 +41,13 @@ class FastaParser:
                 raise ValueError("The file contains sequences that are invalid to the analysis.")
             
             # save sequence info to Biosequence dataclass
-            sequence_string = str(record.seq)
+            sequence_string = str(record.seq).upper()
             new_sequence = NucSequence(
                 id=record.id,
                 sequence=sequence_string,
             )
 
-            self.sequences.append(record)
+            self.sequences.append(new_sequence)
 
         logger.success(f"Found {len(self.sequences)} valid sequences in {self.file_path}")
 
